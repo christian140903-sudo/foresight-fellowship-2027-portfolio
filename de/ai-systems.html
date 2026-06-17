@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KI-Systeme Evidenz</title>
+  <link rel="stylesheet" href="../assets.css">
+</head>
+<body>
+
+    <div class="topbar">
+      <div class="nav">
+        <a class="brand" href="index.html">Foresight Portfolio</a>
+        <div class="navlinks"><a href="index.html">Start</a><a href="ai-systems.html">KI-Systeme</a><a href="technical-evidence.html">Technische Evidenz</a><a href="future-project.html">Zukunftsprojekt</a><a href="application-texts.html">Bewerbungstexte</a><a href="deploy.html">Online stellen</a><a class="lang-switch" href="../ai-systems.html">English</a></div>
+      </div>
+    </div>
+    
+<main class="wrap">
+
+    <section class="section">
+      <h1>KI-Systeme: Evidenzdossier</h1>
+      <p class="lede">Das ist der Kern meiner Fellowship-Story: Ich habe nicht nur Modelle benutzt, sondern Infrastruktur um Modelle herum gebaut - Routing, Memory, Voice, Remote-Ausführung, Tool-Grenzen, Evaluator-Loops und ehrliche Claim-Grenzen.</p>
+      <div class="personal-note"><strong>Mein roter Faden:</strong> Mich interessiert, wie KI-Systeme handeln können, ohne dass Kontext, Kontrolle, Autorität und Nachvollziehbarkeit verloren gehen.</div>
+    </section>
+    
+    <article class="case">
+      <div class="status-row"><span class="pill built">gebaut</span><span class="pill tested">claim-bounded</span></div>
+      <h2>Remote WhatsApp-to-Agent Command Loop</h2>
+      <p><strong>Warum ich es gebaut habe:</strong> Ich wollte von unterwegs mit meinem Handy Arbeit an meinen Laptop übergeben können, ohne daraus eine gefährliche direkte Shell zu machen. Die WhatsApp-Nachricht sollte erst verstanden, in einen Arbeitsauftrag übersetzt, ausgeführt, bewertet und dann sauber zurückgemeldet werden.</p>
+      <div class="split">
+        <div>
+          <h3>Was ich konkret zeigen kann</h3>
+          <ul class="clean"><li>Ich habe Fernzugriff als Autoritäts- und Sicherheitsproblem behandelt, nicht nur als Komfortfunktion.</li><li>Ich habe die Front-Agenten-Schicht von der tool-reichen Ausführungsschicht getrennt.</li><li>Ich habe mobile Sprache/Chat in strukturierte Arbeit mit Erfolgskriterien übersetzt.</li></ul>
+          <h3>Was ich daraus gelernt habe</h3>
+          <ul class="clean"><li>Schnell bestätigen, langsam und kontrolliert arbeiten, erst nach Bewertung antworten.</li><li>Remote-Steuerung braucht Deduplikation, Unterbrechbarkeit, Fortschritt und Audit-Spuren.</li><li>Private Kanal-IDs und Zugangsdaten gehören nie in ein öffentliches Portfolio.</li></ul>
+          <div class="callout warning"><strong>Grenze:</strong> Persönlicher Prototyp bzw. entwickeltes System, keine Behauptung eines produktionsgehärteten Sicherheitsprodukts.</div>
+        </div>
+        <div>
+          <h3>Architektur</h3>
+          <div class="flow"><span>WhatsApp oder Audio kommt in der OpenClaw-Schicht an.</span><span>Ein Watcher normalisiert Ereignisse, dedupliziert Nachrichten und behandelt Medien.</span><span>MiguelAgent macht daraus Ziel, Komplexität, Arbeitsauftrag, Erfolgskriterien und Modell-Hinweis.</span><span>Die Ausführungsseite nutzt Miguel/EXOVIUM-Tools und Modellrouting.</span><span>Eine Qualitätsschleife prueft, ob das Ergebnis wirklich fertig ist.</span><span>Erst danach wird die Antwort wieder an WhatsApp geschickt.</span></div>
+        </div>
+      </div>
+      <div class="card"><h3>Was ich als Nächstes härten würde</h3><ul class="clean"><li>Öffentlichen Demo-Modus mit synthetischen Daten bauen.</li><li>Befehle nach Risiko und Bestätigungsbedarf klassifizieren.</li><li>Tool-Aufrufe, Modellwahl und Bewertung als sichere Audit-Events speichern.</li></ul></div>
+    </article>
+    
+    <article class="case">
+      <div class="status-row"><span class="pill built">gebaut</span><span class="pill tested">claim-bounded</span></div>
+      <h2>Miguel Core Unified Daemon</h2>
+      <p><strong>Warum ich es gebaut habe:</strong> Ich wollte meine vielen einzelnen Agenten-, Voice-, Memory- und Tool-Skripte nicht als lose Sammlung behalten. Miguel Core war mein Versuch, daraus eine beobachtbare lokale Kontrollschicht zu machen.</p>
+      <div class="split">
+        <div>
+          <h3>Was ich konkret zeigen kann</h3>
+          <ul class="clean"><li>Ich denke Agenten nicht als einzelne Prompts, sondern als Betriebssystem-nahe Services.</li><li>Ich kann verstreute Prototypen in eine zentrale Kontrollfläche zusammenführen.</li><li>Ich habe frueh über Health, State, Tool-Oberflächen und Autonomiegrenzen nachgedacht.</li></ul>
+          <h3>Was ich daraus gelernt habe</h3>
+          <ul class="clean"><li>Eine Route zu haben ist nicht dasselbe wie eine Route produktionsreif zu härten.</li><li>Lokale Systeme brauchen trotzdem Beobachtbarkeit, klare Rechte und Fehlergrenzen.</li><li>Autonomie-Ringe sind eine hilfreiche Sprache für sichere und unsichere Aktionen.</li></ul>
+          <div class="callout warning"><strong>Grenze:</strong> Lokale experimentelle Kontrollschicht, nicht als fertiges kommerzielles Produkt formuliert.</div>
+        </div>
+        <div>
+          <h3>Architektur</h3>
+          <div class="flow"><span>Ein Python-Daemon buendelt Chat, Streaming, Voice, State, Vault, Knowledge und Tools.</span><span>Routen verbinden Memory Broker, CASS, Vault Watcher, Prediction, Metacognition und macOS Bridge.</span><span>Orchestra delegiert Aufgaben an Worker und verfolgt Status, Timeout, Ergebnis und Abbruch.</span><span>Start- und Handover-Dateien dokumentieren Modellrouting, Boot Checks und Autonomie-Ringe.</span></div>
+        </div>
+      </div>
+      <div class="card"><h3>Was ich als Nächstes härten würde</h3><ul class="clean"><li>Stabile Public-API aus dem breiten internen Daemon herauslösen.</li><li>Endpoint-Rechte und Risiko-Labels maschinenlesbar dokumentieren.</li><li>Health Reports für alle Hauptmodule erzeugen.</li></ul></div>
+    </article>
+    
+    <article class="case">
+      <div class="status-row"><span class="pill built">gebaut</span><span class="pill tested">claim-bounded</span></div>
+      <h2>Multi-Model Cascade Router</h2>
+      <p><strong>Warum ich es gebaut habe:</strong> Ich wollte nicht alles blind durch ein Modell schicken. Der Router behandelt Modelle als Ressourcen mit Stärken, Kosten, Quoten, Ausfaellen, Qualität und Datenschutzkontext.</p>
+      <div class="split">
+        <div>
+          <h3>Was ich konkret zeigen kann</h3>
+          <ul class="clean"><li>Ich habe Modellwahl als Governance-System behandelt, nicht als Geschmacksfrage.</li><li>Ich habe Kosten, Latenz, Quoten, Qualität und Fallbacks im selben System gedacht.</li><li>Ich habe lokale und API-basierte Modelle in einer Routing-Logik verbunden.</li></ul>
+          <h3>Was ich daraus gelernt habe</h3>
+          <ul class="clean"><li>Ein guter Agent muss elegant schlechter werden können, wenn Modelle ausfallen.</li><li>Qualitätsgates sollten Eskalation auslösen, nicht Modell-Prestige.</li><li>Outcome-Logging ist der Anfang empirischer Modell-Governance.</li></ul>
+          <div class="callout warning"><strong>Grenze:</strong> Exakte Kostenersparnis nur dann behaupten, wenn neue Messlogs sie belegen.</div>
+        </div>
+        <div>
+          <h3>Architektur</h3>
+          <div class="flow"><span>Task-Strategien wählen schnell, hochwertig, gratis, lokal, Code, kreativ oder bulk.</span><span>Lokale Modelle und kostenlose APIs werden dort bevorzugt, wo es sinnvoll ist.</span><span>Quoten, Cooldowns und Ausfaelle blockieren schlechte Routen.</span><span>Qualitätsgates entscheiden, ob eskaliert wird.</span><span>Mehrere freie Modelle können gegeneinander laufen, langsamere Calls werden abgebrochen.</span></div>
+        </div>
+      </div>
+      <div class="card"><h3>Was ich als Nächstes härten würde</h3><ul class="clean"><li>Frische Benchmarks über repräsentative Aufgabenklassen laufen lassen.</li><li>Aggregierte Kosten/Latenz/Qualität ohne Geheimnisse veröffentlichen.</li><li>Policy-Labels für privat, öffentlich, billig, schnell und hochriskant einführen.</li></ul></div>
+    </article>
+    
+    <article class="case">
+      <div class="status-row"><span class="pill built">gebaut / entworfen</span><span class="pill tested">claim-bounded</span></div>
+      <h2>Memory, Vault, CASS und Smart Memory MCP</h2>
+      <p><strong>Warum ich es gebaut habe:</strong> Ich wollte Agenten nicht nur größere Kontextfenster geben, sondern echtes Arbeitsgedaechtnis: roh, zusammengefasst, prozedural, widerspruchsbewusst, veraltetheitsbewusst und wieder abrufbar.</p>
+      <div class="split">
+        <div>
+          <h3>Was ich konkret zeigen kann</h3>
+          <ul class="clean"><li>Ich habe Memory als Governance-Problem behandelt, nicht als Notizablage.</li><li>Ich habe Rohdaten, Zusammenfassungen und Regeln getrennt.</li><li>Ich habe Widerspruch, Veraltung und Herkunft als zentrale Risiken erkannt.</li></ul>
+          <h3>Was ich daraus gelernt habe</h3>
+          <ul class="clean"><li>Agenten werden gefährlich oder nutzlos, wenn sie veraltete Zusammenfassungen für Wahrheit halten.</li><li>Widersprüche sollen erhalten und sichtbar gemacht werden, nicht still überschrieben.</li><li>Retrieval braucht mehr als Textaehnlichkeit: Nützlichkeit, Zeit und Vertrauen zaehlen.</li></ul>
+          <div class="callout warning"><strong>Grenze:</strong> Praktische Memory-Infrastruktur, keine Behauptung menschenähnlichen Bewusstseins.</div>
+        </div>
+        <div>
+          <h3>Architektur</h3>
+          <div class="flow"><span>CASS trennt episodische Rohdaten, Arbeitsgedaechtnis und prozedurale Regeln.</span><span>Memory Broker verteilt wichtige Fakten und markiert leichte Widersprüche.</span><span>Vault Watcher denkt Dateiaenderungen, inkrementelles Indexing, Graph Updates und Staleness.</span><span>Smart Memory MCP macht Lernen, Recall, Stats, Muster und Vorschläge als lokale Tools verfügbar.</span></div>
+        </div>
+      </div>
+      <div class="card"><h3>Was ich als Nächstes härten würde</h3><ul class="clean"><li>Synthetische Public-Memory-Demo bauen.</li><li>Retrieval und Widerspruchserkennung auf nicht-privaten Daten benchmarken.</li><li>Memory-Provenance in Agentenantworten anzeigen.</li></ul></div>
+    </article>
+    
+    <article class="case">
+      <div class="status-row"><span class="pill built">gebaut / erweitert</span><span class="pill tested">claim-bounded</span></div>
+      <h2>Voice Interface and Spoken Tool Use</h2>
+      <p><strong>Warum ich es gebaut habe:</strong> Ich wollte mit meinem System sprechen können, aber Sprache ist für Tools riskant: sie ist schnell, ungenau und kann trotzdem Aktionen auslösen. Deshalb brauchte ich Muting, Tool-Grenzen, Fallbacks und Schutz gegen gefährliche Befehle.</p>
+      <div class="split">
+        <div>
+          <h3>Was ich konkret zeigen kann</h3>
+          <ul class="clean"><li>Ich habe Voice als tool-fähige Kontrolloberflaeche gebaut, nicht nur als Chat-Spielerei.</li><li>Ich habe Datenschutz, Bestätigung und Unterbrechbarkeit von Anfang an mitgedacht.</li><li>Ich habe hochwertige Stimmen mit praktischer Tool-Nutzung verbunden.</li></ul>
+          <h3>Was ich daraus gelernt habe</h3>
+          <ul class="clean"><li>Voice senkt Reibung beim Ausloesen und muss deshalb Reibung beim Risiko erhoehen.</li><li>Barge-in ist ein Sicherheitsfeature, weil ich das System sofort stoppen können muss.</li><li>Eine schoene Stimme ist wertlos, wenn Autorität und Privacy unklar bleiben.</li></ul>
+          <div class="callout warning"><strong>Grenze:</strong> Terminal/Prototyp und Planungsstand sauber trennen; Wake-Word/macOS-Teile nur behaupten, wenn frisch getestet.</div>
+        </div>
+        <div>
+          <h3>Architektur</h3>
+          <div class="flow"><span>Python streamt Mikrofon-Audio in Gemini Live.</span><span>Tools erlauben Vault Search/Read/Write, Deep Thinking, Brain Status und begrenzte Shell.</span><span>Gefährliche Shell-Muster werden blockiert, Ausführung bekommt Timeouts.</span><span>Spätere Planung umfasst Wake Word, lokale STT, Hybrid-TTS, Barge-in und Privacy-Grenzen.</span></div>
+        </div>
+      </div>
+      <div class="card"><h3>Was ich als Nächstes härten würde</h3><ul class="clean"><li>Öffentliche Demo ohne private Mikrofon-/Vault-Daten bauen.</li><li>Safe Tools und confirmation-required Tools klar trennen.</li><li>Transkript-Audit und Korrekturpfade ergänzen.</li></ul></div>
+    </article>
+    
+    <article class="case">
+      <div class="status-row"><span class="pill built">gebaut / getestet</span><span class="pill tested">claim-bounded</span></div>
+      <h2>ANIMA Experimental Kernel</h2>
+      <p><strong>Warum ich es gebaut habe:</strong> Ich wollte spekulative Ideen über Kognition nicht als große Behauptung stehen lassen, sondern in Code, Tests, Metriken und Evidenzgrenzen übersetzen.</p>
+      <div class="split">
+        <div>
+          <h3>Was ich konkret zeigen kann</h3>
+          <ul class="clean"><li>Ich kann eine ambitionierte Idee in ein testbares Paket verwandeln.</li><li>446 lokale Tests wurden im Rebuild erfolgreich ausgeführt.</li><li>Ich begrenze die öffentliche Aussage bewusst: Architektur/Testbed, nicht Bewusstseinsbeweis.</li></ul>
+          <h3>Was ich daraus gelernt habe</h3>
+          <ul class="clean"><li>Große Begriffe brauchen mehr Evidenz als normale Softwareclaims.</li><li>Nicht-signifikante Ergebnisse können wertvoll sein, wenn sie die nächste Hypothese formen.</li><li>Die glaubwürdige Version ist die begrenzte Version.</li></ul>
+          <div class="callout warning"><strong>Grenze:</strong> Kein Beweis für künstliches Bewusstsein; ein ambitioniertes, getestetes Experimentierfeld.</div>
+        </div>
+        <div>
+          <h3>Architektur</h3>
+          <div class="flow"><span>Kernel-, State- und Typmodule bilden den Kern.</span><span>Primitiven wie Qualia, Engram, Valence, Nexus, Impulse, Trace, Mirror und Flux werden testbar gemacht.</span><span>Temporal- und Metrikschichten erlauben Messung statt reiner Philosophie.</span><span>Benchmark- und Evidence-Status-Dateien verhindern überzogene Claims.</span></div>
+        </div>
+      </div>
+      <div class="card"><h3>Was ich als Nächstes härten würde</h3><ul class="clean"><li>Benchmarkbericht mit Baselines und Statistik sauber öffentlich machen.</li><li>Philosophie, Architektur und gemessene Resultate klar trennen.</li><li>ANIMA als Experimentmodul nutzen, nicht als Hauptclaim.</li></ul></div>
+    </article>
+    
+    <section class="download-hub">
+      <h2>Downloadbare PDF-Reports</h2>
+      <p>Jedes PDF ist ein eigenes druckfertiges Dossier, kein flacher Browser-Ausdruck.</p>
+      <div class="download-grid"><div class='download-item'><h3>Start: Review-Route</h3><p>Druckfertiges Hauptdossier</p><a href='../downloads/DE_01_START_HERE_Christian_Bucher_Foresight_Portfolio.pdf'>PDF öffnen</a></div><div class='download-item'><h3>KI-Systeme Dossier</h3><p>Druckfertiges Hauptdossier</p><a href='../downloads/DE_02_AI_Systems_Evidence_Dossier.pdf'>PDF öffnen</a></div><div class='download-item'><h3>Technische Architektur</h3><p>Druckfertiges Hauptdossier</p><a href='../downloads/DE_03_Technical_Architecture_Appendix.pdf'>PDF öffnen</a></div><div class='download-item'><h3>Zukunftsprojekt: ECSA AMR AI</h3><p>Druckfertiges Hauptdossier</p><a href='../downloads/DE_04_Zukunftsprojekt_ECSA_AMR_AI_Architektur.pdf'>PDF öffnen</a></div><div class='download-item'><h3>Bewerbungstexte</h3><p>Druckfertiges Hauptdossier</p><a href='../downloads/DE_05_Bewerbungstexte.pdf'>PDF öffnen</a></div><div class='download-item'><h3>Online stellen</h3><p>Druckfertiges Hauptdossier</p><a href='../downloads/DE_06_Online_Stellen_Anleitung.pdf'>PDF öffnen</a></div></div>
+      <h3>Einzelne Themen-PDFs</h3>
+      <ul class="topic-list"><li><a href='../downloads/thema_remote_agent_command_loop.pdf'>Remote Agent Command Loop</a></li><li><a href='../downloads/thema_miguel_core_unified_daemon.pdf'>Miguel Core Unified Daemon</a></li><li><a href='../downloads/thema_multi_model_cascade_router.pdf'>Multi-Modell Cascade Router</a></li><li><a href='../downloads/thema_memory_vault_cass_mcp.pdf'>Memory, Vault, CASS und Smart Memory MCP</a></li><li><a href='../downloads/thema_voice_interface_spoken_tools.pdf'>Voice Interface und gesprochene Tool-Nutzung</a></li><li><a href='../downloads/thema_anima_experimental_kernel.pdf'>ANIMA Experimental Kernel</a></li><li><a href='../downloads/thema_ecsa_predictive_amr_ai.pdf'>ECSA Predictive AMR AI Architecture</a></li><li><a href='../downloads/thema_amr_horizont_ffg_projekt.pdf'>AMR-HORIZONT / FFG Projektpaket</a></li><li><a href='../downloads/thema_ip_pct_amr_architektur.pdf'>IP-/PCT-artige AMR-Architektur</a></li><li><a href='../downloads/thema_quantum_exon_red_team.pdf'>Quantum / EXON Red-Team-Studie</a></li></ul>
+    </section>
+    
+<div class="footer">Als evidenzorientiertes Portfolio vorbereitet. Öffentliche Dateien enthalten bewusst keine privaten Quellpfade, Zugangsdaten, privaten Kontaktdaten oder lokalen Links.</div>
+</main>
+</body>
+</html>

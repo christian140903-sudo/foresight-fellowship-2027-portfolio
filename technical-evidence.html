@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Technical Evidence</title>
+  <link rel="stylesheet" href="assets.css">
+</head>
+<body>
+
+    <div class="topbar">
+      <div class="nav">
+        <a class="brand" href="index.html">Foresight Portfolio</a>
+        <div class="navlinks"><a href="index.html">Start</a><a href="ai-systems.html">AI systems</a><a href="technical-evidence.html">Technical evidence</a><a href="future-project.html">Future project</a><a href="application-texts.html">Application texts</a><a href="deploy.html">Deploy</a><a class="lang-switch" href="de/technical-evidence.html">Deutsch</a></div>
+      </div>
+    </div>
+    
+<main class="wrap">
+
+    <section class="section">
+      <h1>Technical Evidence Appendix</h1>
+      <p class="lede">This appendix provides a sanitized source map and code-level evidence without exposing private paths, secrets, contact details, tokens, or raw credentials.</p>
+      <table><thead><tr><th>System</th><th>Status</th><th>Evidence sources</th><th>Why it matters</th></tr></thead><tbody><tr><td>Remote command loop</td><td>Built</td><td>OpenClaw watcher, MiguelAgent, EXOVIUM core, WA task manager, cognition routing</td><td>Remote tool use, evaluator loop, progress and reply channel.</td></tr><tr><td>Miguel Core</td><td>Built</td><td>miguel_core.py, orchestra.py, START_MIGUEL, JARVIS handover</td><td>Unified local daemon/control plane and delegation.</td></tr><tr><td>Cascade router</td><td>Built</td><td>ai_router.py, cascade.py, litellm_config.yaml</td><td>Cost/quality/quota-aware model routing.</td></tr><tr><td>Memory</td><td>Built / designed</td><td>cass_pipeline.py, memory_broker.py, vault watcher notes, smart-memory-mcp</td><td>Persistent memory, contradiction, staleness, retrieval.</td></tr><tr><td>Voice</td><td>Built / designed</td><td>voice.py and voice pipeline notes</td><td>Spoken tool use and privacy/safety-sensitive interface design.</td></tr><tr><td>ANIMA</td><td>Built / tested</td><td>anima-kernel tests, benchmarks, evidence-status docs</td><td>446 tests passed; benchmark boundaries documented.</td></tr></tbody></table>
+    </section>
+    <section class="section">
+      <h2>Selected sanitized code shapes</h2>
+      <div class='grid'><div class='card'><h3>Quality loop</h3><pre>async def orchestrate(message):
+    understanding = await understand(message)
+    result = await execute(understanding.work_order)
+    for _ in range(MAX_EVALUATION_LOOPS):
+        evaluation = await evaluate(result, understanding.success_criteria)
+        if evaluation.score &gt;= PASS_THRESHOLD:
+            break
+        result = await execute(evaluation.next_work_order)
+    return format_for_whatsapp(result, evaluation)</pre></div><div class='card'><h3>Cascade routing</h3><pre>def complete(task):
+    for tier in [LOCAL, FREE_API, PAID]:
+        candidates = available_models(tier, task.strategy, quotas, cooldowns)
+        result = run_or_race(candidates, task)
+        log_outcome(result)
+        if quality_gate(result):
+            return result
+    return fallback_or_budget_error()</pre></div><div class='card'><h3>CASS memory</h3><pre>event -&gt; episodic_memory(raw, source, timestamp)
+      -&gt; working_memory(summary, source_links, confidence)
+      -&gt; procedural_memory(rule, bayesian_confidence, decay)
+      -&gt; broker.broadcast(weight, centrality, conflict_flags)</pre></div></div>
+    </section>
+    <section class="section">
+      <h2>Evidence detail by module</h2>
+      <table><thead><tr><th>Source group</th><th>Evidence contribution</th></tr></thead><tbody><tr><td>OpenClaw watcher / MiguelAgent</td><td>Inbound event parsing, audio handling, deduplication, structured understanding, work-order execution, evaluation, response formatting.</td></tr><tr><td>Miguel Core / Orchestra</td><td>Single-daemon consolidation, broad route surface, worker submission/cancellation/status, macOS/tool bridges, boot/handover practices.</td></tr><tr><td>Cascade / AI Router</td><td>Model registry, strategy routing, quota/cooldown tracking, local/free/paid tiers, free-model racing, budget blocking.</td></tr><tr><td>CASS / Memory Broker</td><td>SQLite memory layers, consolidation prompts, broadcast weighting, centrality, contradiction detection, decay/confidence.</td></tr><tr><td>Voice.py</td><td>Gemini Live audio streaming, function tools, vault actions, deep-think daemon route, constrained shell, fallback models, VoiceBridge STT path.</td></tr><tr><td>ANIMA kernel</td><td>Python package with primitives, temporal/state machinery, metrics, methodology docs, benchmark result boundaries, local 446-test run.</td></tr></tbody></table>
+    </section>
+    <section class="section">
+      <h2>What a reviewer should take away</h2>
+      <div class="grid two">
+        <div class="card"><h3>Builder proof</h3><p>The package contains real code-level architecture around agents, not only screenshots or generated documents.</p></div>
+        <div class="card"><h3>Safety proof</h3><p>The work repeatedly touches permission boundaries, model fallback, quality gates, privacy, memory staleness, and negative-result handling.</p></div>
+        <div class="card"><h3>Claim discipline</h3><p>ANIMA, ECSA, patents, funding, and quantum work are separated by status so ambition does not become overclaiming.</p></div>
+        <div class="card"><h3>Next research path</h3><p>The strongest next step is to turn this personal infrastructure into a reproducible secure-agent evaluation and hardening project.</p></div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="callout danger"><strong>Security and privacy handling:</strong> Raw source files contain private machine paths, environment references, and channel credentials. Public artifacts intentionally show architecture and sanitized excerpts rather than raw operational secrets.</div>
+    </section>
+    
+    <section class="section">
+      <h2>Architecture reading map</h2>
+      <p>The source tree is too large to publish raw. The public appendix therefore maps the strongest source clusters by role. This gives a reviewer enough mechanism to understand the work without exposing private credentials or requiring local filesystem access.</p>
+      <table><thead><tr><th>Layer</th><th>What it proves</th><th>Sanitized source cluster</th></tr></thead><tbody><tr><td>Remote/Dual-Brain loop</td><td>Front side interprets intent and judges success; execution side uses tool-rich agent stack; reply happens after evaluation.</td><td>workflows, pipeline notes, watcher, MiguelAgent, EXOVIUM core, WA task manager</td></tr><tr><td>Unified daemon</td><td>One process connects interfaces, models, state, memory, knowledge, prediction, orchestration, macOS/tool surfaces, and conversations.</td><td>miguel_core, START_MIGUEL, JARVIS handover, state probes</td></tr><tr><td>Worker orchestration</td><td>Delegated sub-agent work runs through async task records, subprocess execution, status tracking, cancellation, timeout, and stats.</td><td>orchestra module and delegate scripts</td></tr><tr><td>Model cascade</td><td>Task strategy, provider availability, quotas, cooldowns, historical quality, race/cancel, budget blocking, and fallback are modeled explicitly.</td><td>ai_router, cascade, LiteLLM config</td></tr><tr><td>Memory governance</td><td>Raw episodes, structured working memory, procedural rules, broadcast weighting, contradiction detection, staleness, and retrieval metadata are separate concerns.</td><td>CASS, Memory Broker, Vault Watcher, Smart Memory MCP</td></tr><tr><td>Voice control</td><td>Microphone input becomes a tool-capable control surface with vault operations, daemon calls, constrained shell, mute, fallback, and planned local privacy boundaries.</td><td>voice source, voice-pipeline notes, VoiceBridge specs</td></tr><tr><td>ANIMA</td><td>Speculative cognitive primitives are implemented as a tested kernel with methodology and evidence-status files that limit overclaiming.</td><td>anima-kernel, benchmarks, methodology, evidence status, local test run</td></tr></tbody></table>
+    </section>
+    <section class="section split">
+      <div class="panel">
+        <h2>Security-relevant design pattern</h2>
+        <p>The recurring design pattern is separation of authority. A human-facing message, voice command, or local UI event should not become direct arbitrary execution. It is first interpreted, normalized, routed, executed through scoped tools, evaluated, logged or summarized, and only then returned through the interface. The current work is a personal prototype ecosystem, but that pattern is exactly the kind of practical experience secure agent systems require.</p>
+      </div>
+      <div class="panel">
+        <h2>What still needs hardening</h2>
+        <ul class="clean">
+          <li>Public demo mode with synthetic data and credentials disabled.</li>
+          <li>Explicit permission labels for every tool and route.</li>
+          <li>Confirmation thresholds for destructive or irreversible actions.</li>
+          <li>Machine-readable audit traces for model choice, tool calls, evaluator judgments, and memory provenance.</li>
+          <li>Benchmarks for router quality, voice latency, memory retrieval, and evaluator-loop failure modes.</li>
+        </ul>
+      </div>
+    </section>
+    <section class="section">
+      <h2>Why sanitized excerpts are better than screenshots</h2>
+      <p>Raw screenshots would be weak evidence because they show surface output without mechanism. The appendix instead uses sanitized source shapes, architecture tables, module responsibilities, and claim boundaries. That is more useful to a technical evaluator: it shows what the systems were meant to do, where the evidence sits, and which claims are intentionally withheld because they would require fresh tests or private material.</p>
+    </section>
+    
+    
+    <section class="section">
+      <h2>Public claim matrix</h2>
+      <table><thead><tr><th>Work body</th><th>Safe public status</th><th>Evidence cluster</th><th>Boundary</th></tr></thead><tbody><tr><td>Remote agent workflow</td><td>Built/evolved prototype</td><td>WhatsApp/OpenClaw workflow notes, watcher/MiguelAgent code, decision notes, E2E test notes</td><td>Do not claim production security or publish private channel identifiers or credentials.</td></tr><tr><td>Miguel Core</td><td>Built local control plane</td><td>daemon route surface, orchestra worker module, startup/handover docs</td><td>Do not imply all endpoints are production hardened.</td></tr><tr><td>Multi-model routing</td><td>Built</td><td>AI router, cascade, LiteLLM config, architecture notes</td><td>Do not claim exact cost reduction without fresh measurement.</td></tr><tr><td>Memory/Vault/CASS</td><td>Built/designed</td><td>memory broker, CASS pipeline, vault watcher notes, Smart Memory MCP</td><td>Do not claim human-equivalent memory or consciousness.</td></tr><tr><td>Voice system</td><td>Built plus expanded design</td><td>voice source, VoiceBridge notes, pipeline specs</td><td>Separate implemented terminal voice from planned wake-word/macOS pipeline.</td></tr><tr><td>ANIMA</td><td>Built/tested experimental kernel</td><td>package, tests, methodology, evidence-status note</td><td>Not proof of consciousness.</td></tr><tr><td>ECSA AMR</td><td>Designed architecture/future project</td><td>AMR proposal, PCT-style drafting, utility-model text exports</td><td>Not clinically validated decision support.</td></tr><tr><td>AMR-HORIZONT / FFG</td><td>Prepared project package</td><td>call pack, Q&amp;A, budget/work packages, stakeholder and test plans</td><td>Do not claim funding granted unless confirmed.</td></tr><tr><td>IP/PCT-style work</td><td>Prepared formal technical drafting</td><td>PCT/utility-model-style docs and claim architecture</td><td>Do not claim granted patent/legal validity without verification.</td></tr><tr><td>Quantum/EXON</td><td>Speculative red-team study</td><td>no-signaling reports, adversarial analyses, negative-result docs</td><td>Not proof of FTL or validated new physics.</td></tr></tbody></table>
+    </section>
+    
+    
+    <section class="personal-note">
+      <p>I include this because it shows how I think while building: mechanism first, evidence next, claim boundary always.</p>
+    </section>
+    
+    <section class="download-hub">
+      <h2>Downloadable PDF reports</h2>
+      <p>Each PDF is a separate printable report, not a shallow browser printout.</p>
+      <div class="download-grid"><div class='download-item'><h3>Start Here / Review Route</h3><p>Print-ready main dossier</p><a href='downloads/01_START_HERE_Christian_Bucher_Foresight_Portfolio.pdf'>Open PDF</a></div><div class='download-item'><h3>AI Systems Dossier</h3><p>Print-ready main dossier</p><a href='downloads/02_AI_Systems_Evidence_Dossier.pdf'>Open PDF</a></div><div class='download-item'><h3>Technical Architecture Appendix</h3><p>Print-ready main dossier</p><a href='downloads/03_Technical_Architecture_Appendix.pdf'>Open PDF</a></div><div class='download-item'><h3>Future Project: ECSA AMR AI</h3><p>Print-ready main dossier</p><a href='downloads/04_Future_Project_ECSA_AMR_AI_Architecture.pdf'>Open PDF</a></div><div class='download-item'><h3>Copy-Ready Application Texts</h3><p>Print-ready main dossier</p><a href='downloads/05_Copy_Ready_Application_Texts.pdf'>Open PDF</a></div><div class='download-item'><h3>Deployment Guide</h3><p>Print-ready main dossier</p><a href='downloads/06_Deployment_Guide.pdf'>Open PDF</a></div></div>
+      <h3>Individual topic PDFs</h3>
+      <ul class="topic-list"><li><a href='downloads/topic_remote_agent_command_loop.pdf'>Remote agent command loop</a></li><li><a href='downloads/topic_miguel_core_unified_daemon.pdf'>Miguel Core unified daemon</a></li><li><a href='downloads/topic_multi_model_cascade_router.pdf'>Multi-model cascade router</a></li><li><a href='downloads/topic_memory_vault_cass_mcp.pdf'>Memory, vault, CASS, Smart Memory MCP</a></li><li><a href='downloads/topic_voice_interface_spoken_tools.pdf'>Voice interface and spoken tool use</a></li><li><a href='downloads/topic_anima_experimental_kernel.pdf'>ANIMA experimental kernel</a></li><li><a href='downloads/topic_ecsa_predictive_amr_ai.pdf'>ECSA predictive AMR AI architecture</a></li><li><a href='downloads/topic_amr_horizont_ffg_project.pdf'>AMR-HORIZONT / FFG project package</a></li><li><a href='downloads/topic_ip_pct_amr_architecture.pdf'>IP / PCT-style AMR architecture</a></li><li><a href='downloads/topic_quantum_exon_red_team.pdf'>Quantum / EXON red-team study</a></li></ul>
+    </section>
+    
+<div class="footer">Prepared as an evidence-first portfolio package. Public files intentionally omit private source paths, credentials, private contact data, and raw local links.</div>
+</main>
+</body>
+</html>

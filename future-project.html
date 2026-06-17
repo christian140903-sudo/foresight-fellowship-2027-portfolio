@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Future Project ECSA</title>
+  <link rel="stylesheet" href="assets.css">
+</head>
+<body>
+
+    <div class="topbar">
+      <div class="nav">
+        <a class="brand" href="index.html">Foresight Portfolio</a>
+        <div class="navlinks"><a href="index.html">Start</a><a href="ai-systems.html">AI systems</a><a href="technical-evidence.html">Technical evidence</a><a href="future-project.html">Future project</a><a href="application-texts.html">Application texts</a><a href="deploy.html">Deploy</a><a class="lang-switch" href="de/future-project.html">Deutsch</a></div>
+      </div>
+    </div>
+    
+<main class="wrap">
+
+    <section class="mast">
+      <div>
+        <div class="status-row"><span class="pill designed">Designed</span><span class="pill built">IP-style materials prepared</span><span class="pill speculative">Not clinically validated</span></div>
+        <h1>Future Project: ECSA Predictive AMR AI Architecture</h1>
+        <p class="lede">A staged AI-for-science project direction: probabilistic modeling of antimicrobial resistance dynamics using graph/state-space models, uncertainty, stability, lab-in-the-loop validation, and regulatory/open-science governance.</p>
+      </div>
+      <aside class="panel">
+        <h2>Boundary</h2>
+        <p>This is an architecture/proposal and IP-style drafting body of work. It should be developed into a proof of concept before any clinical or decision-support claims are made.</p>
+      </aside>
+    </section>
+    <section class="section split">
+      <div class="panel">
+        <h2>Core model</h2>
+        <ul class="clean">
+          <li>Nodes represent microbial resistance or sensitivity states.</li>
+          <li>Edges represent transitions, collateral sensitivity, cross-resistance, risk, or time-dependent weights.</li>
+          <li>Each state carries resistance R, uncertainty U/sigma, and stability S.</li>
+          <li>New measurement data updates node parameters, edge probabilities, and graph structure.</li>
+          <li>Outputs include resistance trajectories, risk indicators, intervention options, and visualizations.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>Lab-in-the-loop cycle</h2>
+        <div class="flow">
+          <span>Gold-data generation through standardized wet-lab experiments</span>
+          <span>Bayesian inference updates probabilities and uncertainty intervals</span>
+          <span>GNN layer detects clusters and predicts missing relationships</span>
+          <span>Optional RL simulates stable intervention paths</span>
+          <span>Hypotheses return to laboratory validation</span>
+          <span>Governance layer tracks audit, bias, FAIR, MDR / AI Act readiness</span>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <h2>AMR-HORIZONT as project execution evidence</h2>
+      <p>AMR-HORIZONT is a separate FFG Impact Innovation Social Track package for a participatory One-Health decision framework. It shows 12-month project planning, budget logic, work packages, stakeholder strategy, LOI materials, evaluator Q&A, red-flag mitigation, concrete outputs, and scenario-based testing.</p>
+      <div class="callout warning">Use in the Fellowship package as secondary proof of project organization and governance thinking, not as the main Secure AI evidence.</div>
+    </section>
+    <section class="section">
+      <h2>Proof-of-concept roadmap</h2>
+      <div class="grid">
+        <div class="card"><h3>Phase 1: data and simulator</h3><p>Build a synthetic AMR state-space simulator with explicit resistance, uncertainty, and stability parameters. Use public literature examples and synthetic transition matrices before touching sensitive clinical data.</p></div>
+        <div class="card"><h3>Phase 2: model layer</h3><p>Implement Bayesian updating and graph link prediction on the synthetic/public dataset. Measure calibration, uncertainty behavior, and failure cases.</p></div>
+        <div class="card"><h3>Phase 3: governance layer</h3><p>Add model cards, data provenance, audit logs, red-team tests, and decision-support disclaimers before any real-world stakeholder presentation.</p></div>
+      </div>
+    </section>
+    <section class="section">
+      <h2>Risk controls</h2>
+      <table>
+        <thead><tr><th>Risk</th><th>Control</th></tr></thead>
+        <tbody>
+          <tr><td>Overclaiming medical value</td><td>Keep all outputs as research/prototype until externally validated.</td></tr>
+          <tr><td>Data bias or sparse gold data</td><td>Use uncertainty estimates, stratified sampling, and external validation.</td></tr>
+          <tr><td>Runaway feedback between model and lab hypotheses</td><td>Human-in-the-loop review, re-baselines, and drift detection.</td></tr>
+          <tr><td>Privacy/GDPR exposure</td><td>Begin with public/synthetic data and design pseudonymization/provenance before clinical data.</td></tr>
+          <tr><td>Regulatory mismatch</td><td>Document intended-use boundaries and SaMD/AI Act implications from the start.</td></tr>
+        </tbody>
+      </table>
+    </section>
+    
+    <section class="section">
+      <h2>Why ECSA belongs in the Fellowship package</h2>
+      <p>ECSA should not lead the Fellowship application, because the Secure AI proof is stronger in the agent-infrastructure work. It belongs as the future project answer: a concrete AI-for-science direction where probabilistic modeling, uncertainty, lab feedback, governance, and model accountability all matter.</p>
+      <p>The proposed system models antimicrobial resistance as a dynamic graph/state-space problem. Instead of returning one black-box prediction, it carries resistance, uncertainty, and stability through the model, updates those parameters with new evidence, and returns risk/trajectory information together with the limits of the current model.</p>
+    </section>
+    <section class="section">
+      <h2>Technical POC sequence</h2>
+      <table>
+        <thead><tr><th>Stage</th><th>Build</th><th>Success criterion</th><th>Reason for Foresight</th></tr></thead>
+        <tbody>
+          <tr><td>1. Synthetic/public simulator</td><td>Create a small state-space AMR simulator with explicit R, U/sigma, S, transition weights, and noisy observations.</td><td>Model behavior is reproducible without private clinical data.</td><td>Shows safety-first project staging.</td></tr>
+          <tr><td>2. Bayesian update layer</td><td>Implement uncertainty-aware updates from synthetic/literature-derived observations.</td><td>Calibration and uncertainty shrinkage can be measured.</td><td>Connects AI reliability to scientific uncertainty.</td></tr>
+          <tr><td>3. Graph learning layer</td><td>Add link prediction or graph neural network experiments for missing collateral-sensitivity relationships.</td><td>Predictions are compared against withheld or simulated links.</td><td>Moves beyond static dashboards toward testable AI-for-science.</td></tr>
+          <tr><td>4. Governance/audit layer</td><td>Add model cards, data provenance, decision boundary, failure modes, and human-review gates.</td><td>No output can be mistaken for validated clinical advice.</td><td>Shows maturity for high-stakes domains.</td></tr>
+          <tr><td>5. External validation plan</td><td>Prepare a lab/stakeholder protocol before any real-data claim.</td><td>Independent expert review gates the next step.</td><td>Aligns with Foresight mentorship/network value.</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="section">
+      <h2>How it connects back to the AI systems</h2>
+      <p>The personal agent work and ECSA are not random separate interests. The same engineering concerns transfer: model routing, evaluator loops, memory provenance, uncertainty, auditability, and human-in-the-loop control. Miguel-like infrastructure could support literature ingestion, hypothesis generation, experiment tracking, model evaluation, and governance documentation, while ECSA gives that infrastructure a serious scientific target.</p>
+    </section>
+    
+    
+    <section class="personal-note">
+      <p>I include this because it shows how I think while building: mechanism first, evidence next, claim boundary always.</p>
+    </section>
+    
+    <section class="download-hub">
+      <h2>Downloadable PDF reports</h2>
+      <p>Each PDF is a separate printable report, not a shallow browser printout.</p>
+      <div class="download-grid"><div class='download-item'><h3>Start Here / Review Route</h3><p>Print-ready main dossier</p><a href='downloads/01_START_HERE_Christian_Bucher_Foresight_Portfolio.pdf'>Open PDF</a></div><div class='download-item'><h3>AI Systems Dossier</h3><p>Print-ready main dossier</p><a href='downloads/02_AI_Systems_Evidence_Dossier.pdf'>Open PDF</a></div><div class='download-item'><h3>Technical Architecture Appendix</h3><p>Print-ready main dossier</p><a href='downloads/03_Technical_Architecture_Appendix.pdf'>Open PDF</a></div><div class='download-item'><h3>Future Project: ECSA AMR AI</h3><p>Print-ready main dossier</p><a href='downloads/04_Future_Project_ECSA_AMR_AI_Architecture.pdf'>Open PDF</a></div><div class='download-item'><h3>Copy-Ready Application Texts</h3><p>Print-ready main dossier</p><a href='downloads/05_Copy_Ready_Application_Texts.pdf'>Open PDF</a></div><div class='download-item'><h3>Deployment Guide</h3><p>Print-ready main dossier</p><a href='downloads/06_Deployment_Guide.pdf'>Open PDF</a></div></div>
+      <h3>Individual topic PDFs</h3>
+      <ul class="topic-list"><li><a href='downloads/topic_remote_agent_command_loop.pdf'>Remote agent command loop</a></li><li><a href='downloads/topic_miguel_core_unified_daemon.pdf'>Miguel Core unified daemon</a></li><li><a href='downloads/topic_multi_model_cascade_router.pdf'>Multi-model cascade router</a></li><li><a href='downloads/topic_memory_vault_cass_mcp.pdf'>Memory, vault, CASS, Smart Memory MCP</a></li><li><a href='downloads/topic_voice_interface_spoken_tools.pdf'>Voice interface and spoken tool use</a></li><li><a href='downloads/topic_anima_experimental_kernel.pdf'>ANIMA experimental kernel</a></li><li><a href='downloads/topic_ecsa_predictive_amr_ai.pdf'>ECSA predictive AMR AI architecture</a></li><li><a href='downloads/topic_amr_horizont_ffg_project.pdf'>AMR-HORIZONT / FFG project package</a></li><li><a href='downloads/topic_ip_pct_amr_architecture.pdf'>IP / PCT-style AMR architecture</a></li><li><a href='downloads/topic_quantum_exon_red_team.pdf'>Quantum / EXON red-team study</a></li></ul>
+    </section>
+    
+<div class="footer">Prepared as an evidence-first portfolio package. Public files intentionally omit private source paths, credentials, private contact data, and raw local links.</div>
+</main>
+</body>
+</html>
