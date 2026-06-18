@@ -19,7 +19,8 @@
       <p class="side-note">Built as a public reviewer dossier: evidence first, claims bounded, PDFs printable.</p>
     </aside>
     <main class="main"><div class="wrap">
-    <section class="section"><h1>AI systems, architecture and implementation evidence</h1><p class="lede">This page is the core proof. It explains each system as mechanism, not as a screenshot gallery.</p></section>
+    <section class="section"><h1>AI systems, architecture and implementation evidence</h1><p class="lede">This is the core proof page: each system is explained as a mechanism with evidence, boundary, personal motivation and next hardening step.</p></section>
+    <section class="section"><div class='architecture-band'><ol><li><b>Ingress</b><span>phone/voice/remote</span></li><li><b>Interpretation</b><span>work order and criteria</span></li><li><b>Execution</b><span>tools, models, local daemon</span></li><li><b>Evaluation</b><span>boundary, audit, reply</span></li></ol></div><div class='review-strip'><div><strong>Remote</strong><span>Phone tasks become structured work orders.</span></div><div><strong>Control plane</strong><span>Miguel Core consolidates routes, state, workers and health.</span></div><div><strong>Governance</strong><span>Router and memory handle cost, privacy, contradiction and staleness.</span></div><div><strong>Interface</strong><span>Voice makes tool use direct and therefore safety-sensitive.</span></div></div></section>
     
     <article class="case" id="remote-whatsapp-to-agent-command-loop" data-case data-kind="ai-system ">
       <header>
@@ -30,8 +31,9 @@
         <span class='status tested'>Built, E2E tested in notes</span>
       </header>
       <p><strong>Why I built it:</strong> A phone should be able to issue work to a home computer without turning the system into an unsafe direct shell. The design had to translate casual WhatsApp messages or audio into structured work orders, run them through a tool-enabled agent side, judge completion, and only then report back.</p>
-      <details open>
-        <summary>Read the technical case</summary>
+      <div class="personal-note"><strong>What I had in mind:</strong> What I had in mind was simple but technically demanding: I wanted to be away from my laptop and still delegate meaningful work to it without turning my phone into a blind remote shell. The interesting part was the trust boundary. A message had to become a work order, the work order had to be executed by the right side of the system, and the result had to survive evaluation before coming back to me.</div>
+      <details>
+        <summary>Open full technical deep dive</summary>
         <div class="deep-grid">
           <section><h4>What I built</h4><ul><li>Implemented across OpenClaw watcher, MiguelAgent, EXOVIUM core, WA task manager, cognition routing, and architecture notes. Source notes document immediate ACK behavior, quality-loop thresholding, model routing, audio transcription, and two successful end-to-end tests.</li></ul></section>
           <section><h4>Architecture</h4><ul><li>WhatsApp message or audio arrives through OpenClaw.</li><li>A watcher normalizes inbound events, handles media, deduplicates repeated messages, and dispatches work.</li><li>MiguelAgent interprets the request into goal, complexity, work order, success criteria, and model hint.</li><li>The execution side uses EXOVIUM/Miguel tooling and model routing.</li><li>A quality loop evaluates the result and can ask for an improved work order before replying.</li><li>The final response is formatted and sent back through WhatsApp.</li></ul></section>
@@ -61,8 +63,9 @@
         <span class='status built'>Built</span>
       </header>
       <p><strong>Why I built it:</strong> Early systems had separate daemons, command scripts, and services. Miguel Core consolidated the control surface into a local Python daemon that could coordinate chat, streaming, voice, memory, model tiers, orchestration, state, and tool endpoints.</p>
-      <details open>
-        <summary>Read the technical case</summary>
+      <div class="personal-note"><strong>What I had in mind:</strong> Miguel Core came from a very practical frustration: I had too many strong pieces living as separate scripts and services. I wanted one local control layer that could make the system observable, routable and easier to reason about.</div>
+      <details>
+        <summary>Open full technical deep dive</summary>
         <div class="deep-grid">
           <section><h4>What I built</h4><ul><li>Central file `miguel_core.py` documents the consolidation goal and exposes the route surface. `orchestra.py` implements async worker delegation to Opus, Codex, GPT-style workers through a subprocess layer with timeouts, cancellation, status, and stats.</li></ul></section>
           <section><h4>Architecture</h4><ul><li>One daemon replaces fragmented service surfaces.</li><li>Routes cover chat/streaming, voice, state, vault, knowledge, prediction, cascade, agents, metacognition, orchestra, macOS/tool endpoints, and conversations.</li><li>Imports connect memory broker, CASS pipeline, vault watcher, prediction, metacognition, state graph, orchestra, and macOS bridge.</li><li>Startup/handover scripts define model routing, state probes, boot checks, and autonomy rings.</li></ul></section>
@@ -86,8 +89,9 @@
         <span class='status built'>Built</span>
       </header>
       <p><strong>Why I built it:</strong> Agent systems fail when all tasks are pushed through one model. The router treats models as resources with strengths, costs, quotas, cooldowns, and failure modes.</p>
-      <details open>
-        <summary>Read the technical case</summary>
+      <div class="personal-note"><strong>What I had in mind:</strong> I did not want to treat model choice as taste. I wanted routing to be part of the architecture: cheap when possible, strong when necessary, local when privacy matters, and fallback-aware when a provider fails.</div>
+      <details>
+        <summary>Open full technical deep dive</summary>
         <div class="deep-grid">
           <section><h4>What I built</h4><ul><li>`ai_router.py`, `cascade.py`, and `litellm_config.yaml` define model registries, routing strategies, tiering, quota tracking, fallback, race/cancel behavior, and budget-aware escalation.</li></ul></section>
           <section><h4>Architecture</h4><ul><li>Task strategy selects speed, quality, free, code, creative, bulk, or local routing.</li><li>Local models are tried before free APIs and paid tiers where appropriate.</li><li>Quota/cooldown tracking blocks bad or unavailable routes.</li><li>Quality gates decide whether to escalate.</li><li>Free API models can be raced in parallel and slower calls cancelled after a sufficient answer.</li><li>Outcomes are logged for later learning.</li></ul></section>
@@ -119,8 +123,9 @@
         <span class='status designed'>Built / designed</span>
       </header>
       <p><strong>Why I built it:</strong> Long-running agents need more than a large context window. They need raw memory, compressed memory, procedural learning, contradiction handling, retrieval, and a way to avoid acting on stale facts.</p>
-      <details open>
-        <summary>Read the technical case</summary>
+      <div class="personal-note"><strong>What I had in mind:</strong> The memory work came from noticing that agents do not only need more context. They need memory hygiene: raw facts, summaries, procedural learning, contradictions, staleness and provenance.</div>
+      <details>
+        <summary>Open full technical deep dive</summary>
         <div class="deep-grid">
           <section><h4>What I built</h4><ul><li>`cass_pipeline.py`, `memory_broker.py`, vault-watcher design notes, and `smart-memory-mcp/server.js` show schemas, scoring, contradiction logic, TF-IDF retrieval, recency/usefulness metadata, and MCP tool declarations.</li></ul></section>
           <section><h4>Architecture</h4><ul><li>CASS keeps episodic raw records, structured working memory, and procedural rules with confidence/decay.</li><li>Memory Broker broadcasts high-value or central facts across memory systems and flags contradictions.</li><li>Vault watcher design handles file-change detection, incremental reindexing, graph updates, staleness propagation, and forgetting scores.</li><li>Smart Memory MCP provides a simple local protocol component for learn/recall/stats/patterns/suggestions.</li></ul></section>
@@ -147,8 +152,9 @@
         <span class='status designed'>Built, Design expanded</span>
       </header>
       <p><strong>Why I built it:</strong> Voice control is powerful because it lowers friction, but spoken commands are ambiguous and can trigger tools. The system needed tool routing, muting, fallbacks, destructive-command filtering, and a privacy-forward plan.</p>
-      <details open>
-        <summary>Read the technical case</summary>
+      <div class="personal-note"><strong>What I had in mind:</strong> Voice was exciting because it made the system feel immediate, but that is also why it is dangerous. If I can speak and the computer acts, then muting, confirmation, shell limits and privacy are part of the product, not accessories.</div>
+      <details>
+        <summary>Open full technical deep dive</summary>
         <div class="deep-grid">
           <section><h4>What I built</h4><ul><li>`voice.py` contains Gemini Live config, sample-rate handling, tool declarations, dispatcher, vault tools, deep-think route, shell guard, reconnect/fallback loop, and VoiceBridge experiments. Planning notes define latency targets, privacy red lines, and acceptance criteria.</li></ul></section>
           <section><h4>Architecture</h4><ul><li>Python terminal voice interface streams microphone audio into Gemini Live.</li><li>The Live config exposes tools for vault search/read/write, deep thinking through Miguel Core, brain status, context, and constrained shell execution.</li><li>Dangerous shell patterns are blocked and command execution is timeout-limited.</li><li>A later design adds wake-word, local STT, hybrid TTS, barge-in, and privacy boundaries.</li></ul></section>
@@ -178,8 +184,9 @@ return run_with_timeout(tool_call)</pre></div>
         <span class='status tested'>Built, 446 tests passed</span>
       </header>
       <p><strong>Why I built it:</strong> Speculative cognition ideas often remain untestable prose. ANIMA turns a set of cognitive/consciousness-inspired primitives into a Python package with state, metrics, tests, benchmarks, and evidence-status notes.</p>
-      <details open>
-        <summary>Read the technical case</summary>
+      <div class="personal-note"><strong>What I had in mind:</strong> ANIMA was my way of taking a very ambitious idea and forcing it into code, tests and evidence. The point is not to claim consciousness. The point is to show that even a fuzzy idea can be disciplined into architecture, metrics and boundaries.</div>
+      <details>
+        <summary>Open full technical deep dive</summary>
         <div class="deep-grid">
           <section><h4>What I built</h4><ul><li>Local test run during rebuild: `python3 -m pytest -q` in `anima-kernel` returned 446 passed tests with one config warning. Benchmark evidence notes say current results support architecture/testbed value, not proof of consciousness.</li></ul></section>
           <section><h4>Architecture</h4><ul><li>Kernel/state/type modules.</li><li>Primitives such as qualia, engram, valence, nexus, impulse, trace, mirror, and flux.</li><li>Temporal substrate and metric layers.</li><li>Benchmarks and ablation methodology.</li><li>Evidence status file that overrides over-strong claims.</li></ul></section>
