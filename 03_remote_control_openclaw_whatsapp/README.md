@@ -2,9 +2,10 @@
 
 ## What this evidence shows
 
-I wanted AI work to continue while I was away from the machine. The system concept connected mobile messages to a local agent stack, with a second worker layer handling tool-rich execution and a return path after quality checks.
+The system turns mobile messages into bounded agent work orders. A phone message enters through WhatsApp/OpenClaw, becomes structured intent, routes into a local agent stack, delegates tool-rich execution to a worker layer and returns only after a quality gate accepts the result.
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"background": "#020617", "primaryColor": "#111827", "primaryTextColor": "#f8fafc", "primaryBorderColor": "#f8fafc", "secondaryColor": "#0f172a", "tertiaryColor": "#1f2937", "lineColor": "#f8fafc", "fontFamily": "Inter, ui-sans-serif, system-ui", "actorBkg": "#111827", "actorTextColor": "#f8fafc", "actorBorder": "#f8fafc", "signalColor": "#f8fafc", "signalTextColor": "#f8fafc", "activationBkgColor": "#1f2937", "activationBorderColor": "#f8fafc"}}}%%
 sequenceDiagram
     participant Phone as "Phone / WhatsApp"
     participant OpenClaw as "OpenClaw webhook"
@@ -61,4 +62,3 @@ Phone numbers, local machine details and private config paths were not published
 ## Engineering signal
 
 This is a concrete remote-operations loop: mobile input, webhook capture, intent parsing, model/tool orchestration, quality gate and return message.
-

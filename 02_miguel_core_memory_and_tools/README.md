@@ -5,6 +5,7 @@
 Miguel was not treated as one chatbot. I treated it as a local AI operating layer with memory, retrieval, tool access, browser control, code-quality tools, persistent state and external interaction channels.
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"background": "#020617", "primaryColor": "#111827", "primaryTextColor": "#f8fafc", "primaryBorderColor": "#f8fafc", "secondaryColor": "#0f172a", "tertiaryColor": "#1f2937", "lineColor": "#f8fafc", "fontFamily": "Inter, ui-sans-serif, system-ui"}}}%%
 flowchart TB
     U["User intent"] --> M["Miguel agent layer"]
     M --> C["Cortex memory\nsemantic recall + learning"]
@@ -23,4 +24,3 @@ flowchart TB
 ## Claim boundary
 
 The excerpts show architecture, interfaces and operating concept. They do not claim a polished commercial assistant product.
-

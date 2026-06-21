@@ -2,9 +2,10 @@
 
 ## What this evidence shows
 
-The ECSA project frames antimicrobial resistance as a probabilistic state and graph problem, not as a simple molecule-search exercise. The technical center is uncertainty-aware collateral sensitivity modeling, lab-in-the-loop validation and regulatory readiness.
+The ECSA project frames antimicrobial resistance as a probabilistic state and graph problem, not as a molecule-search shortcut. The technical center is uncertainty-aware collateral sensitivity modeling, lab-in-the-loop validation and regulatory readiness.
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"background": "#020617", "primaryColor": "#111827", "primaryTextColor": "#f8fafc", "primaryBorderColor": "#f8fafc", "secondaryColor": "#0f172a", "tertiaryColor": "#1f2937", "lineColor": "#f8fafc", "fontFamily": "Inter, ui-sans-serif, system-ui"}}}%%
 flowchart LR
     A["FAIR AMR data corpus"] --> B["CS graph"]
     B --> C["P(CS_ij)\nsigma_ij\nS_ij"]
@@ -60,4 +61,3 @@ ECSA goals:
 ## Claim boundary
 
 This is presented as a high-stakes AI-for-science architecture and proof-of-concept direction, not as a clinically validated medical product.
-

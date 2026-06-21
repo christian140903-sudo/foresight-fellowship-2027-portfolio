@@ -5,6 +5,7 @@
 EXON is included because it documents epistemic restraint. I pushed a speculative quantum communication idea through a falsification process, accepted the no-signaling boundary, and preserved the surviving methodological residue instead of overstating the result.
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"background": "#020617", "primaryColor": "#111827", "primaryTextColor": "#f8fafc", "primaryBorderColor": "#f8fafc", "secondaryColor": "#0f172a", "tertiaryColor": "#1f2937", "lineColor": "#f8fafc", "fontFamily": "Inter, ui-sans-serif, system-ui"}}}%%
 flowchart TB
     A["Ambitious hypothesis"] --> B["Formal stress test"]
     B --> C["No-signaling / density matrix audit"]
@@ -46,4 +47,3 @@ Does not claim:
 ## Engineering signal
 
 The important signal is not that the original hypothesis survived. It did not. The signal is the discipline to falsify it, keep the boundary explicit and convert the work into a clean red-team case study.
-

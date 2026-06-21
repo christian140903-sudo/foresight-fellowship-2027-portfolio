@@ -2,7 +2,7 @@
 
 ## What this evidence shows
 
-The PCT-style material demonstrates an attempt to formalize the AMR direction into a defensible technical system: state variables, dynamic updating, graph extension, risk indicators and decision-support framing.
+The PCT-style material formalizes the AMR direction into a defensible technical system: state variables, dynamic updating, graph extension, risk indicators and decision-support framing.
 
 ## Original excerpt
 
@@ -43,4 +43,3 @@ The model supports:
 ## Claim boundary
 
 This is formalization and project/IP groundwork. It is not presented as granted patent protection or as clinical validation.
-

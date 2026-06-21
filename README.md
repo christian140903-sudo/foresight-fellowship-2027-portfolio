@@ -1,8 +1,8 @@
-# Christian Bucher - Foresight-Relevant Evidence Excerpts
+# Christian Bucher - Foresight Evidence Audit Trail
 
-This repository contains a curated source-evidence package: selected original excerpts from the systems, notebooks, architecture notes, research blueprints and formal project material behind Christian Bucher's Foresight-facing portfolio. The goal is to let a technical reviewer inspect real artifacts directly.
+This repository is the Foresight-facing evidence audit trail: selected original excerpts from the systems, notebooks, architecture notes, research blueprints and formal project material behind Christian Bucher's portfolio. It exists so a technical reviewer can inspect mechanism, source shape and claim boundary directly instead of relying on polished summary copy alone.
 
-## What is inside
+## Evidence map
 
 | Area | Folder | What the excerpts show |
 |---|---|---|
@@ -14,7 +14,7 @@ This repository contains a curated source-evidence package: selected original ex
 | Quantum red-team | `06_exon_quantum_red_team` | A falsification-oriented EXON / quantum communication case study with explicit no-signaling boundaries. |
 | Formalization/IP | `07_pct_ip_formalization` | A PCT-style probabilistic state-space model for AMR evolution and decision support. |
 
-## Reading order
+## Reviewer route
 
 1. Start with `00_SOURCE_INDEX.md`.
 2. Open `01_autowatcher_v7_zero_cost_compute_bypass/README.md`.
@@ -23,4 +23,4 @@ This repository contains a curated source-evidence package: selected original ex
 
 ## Redaction policy
 
-Private local paths, phone numbers, credentials, account names and API keys are not included. Some excerpts are normalized for public reading, but the technical structure, naming and intent are preserved.
+Private local paths, phone numbers, credentials, account names and API keys are excluded. Some excerpts are normalized for public reading; technical structure, naming and intent are preserved.
